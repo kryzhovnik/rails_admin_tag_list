@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.add_development_dependency('devise', '~> 1.1')
-  s.add_development_dependency('acts-as-taggable-on')
+  s.add_development_dependency('acts-as-taggable-on', '~> 2.0')
   s.add_development_dependency('rspec-rails', '~> 2.4')
   s.add_development_dependency('webrat', '~> 0.7')
   s.add_development_dependency('yard', '~> 0.6')
