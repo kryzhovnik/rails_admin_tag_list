@@ -13,7 +13,7 @@ Installation
 ============
 
 In your `Gemfile`:
-    gem 'rails_admin', :git => 'https://github.com/kryzhovnik/rails_admin.git'
+    gem 'rails_admin', :git => 'https://github.com/kryzhovnik/rails_admin.git', :branch => 'namespaced-models'
     gem 'rails_admin_tag_list_field', :git => 'https://github.com/kryzhovnik/rails_admin_tag_list_field.git'
 
 And run:
@@ -21,8 +21,7 @@ And run:
     
 If you want to use your own rails_admin fork first do the following:
 
-1. Solve namespaced models issue in your rails_admin fork (for [example](https://github.com/kryzhovnik/rails_admin/commit/4afd632560109ea5324b66108ae3b764f55f73a7))
-
+1. Solve namespaced models issue in your rails_admin fork (for [example](https://github.com/kryzhovnik/rails_admin/commit/744164ca549a592d1876be3bdd12e34e80438059)
 2. Fork this gem and correct dependences in the `rails_admin_tag_list_field/Gemfile`
     gem 'rails_admin', :git => '...'
     
