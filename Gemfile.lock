@@ -1,7 +1,6 @@
 GIT
-  remote: git://github.com/kryzhovnik/rails_admin.git
-  revision: 744164ca549a592d1876be3bdd12e34e80438059
-  branch: namespaced-models
+  remote: git://github.com/sferik/rails_admin.git
+  revision: 971460a56412ee6aeb77aaec1481340fbb259e51
   specs:
     rails_admin (0.0.1)
       builder (~> 2.1.0)

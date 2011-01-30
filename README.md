@@ -1,37 +1,27 @@
 Introduction
 ============
 
-For today(21 jan 2011) great [rails_admin](https://github.com/sferik/rails_admin) gem does not work with another great gem - [acts_as_taggable_on](https://github.com/mbleigh/acts-as-taggable-on). Due to two following problems:
+For today(21 jan 2011) great [rails_admin](https://github.com/sferik/rails_admin) gem does not work with another great gem - [acts_as_taggable_on](https://github.com/mbleigh/acts-as-taggable-on), because rails_admin knows nothing about the virtual attributes *_list(tag_list, skill_list etc.), which created by `acts_as_taggable_on` for display and edit tags.
 
-* rails_admin does not yet support namespaced models(for example `ActsAsTaggableOn::Taggings` model) [issue](https://github.com/sferik/rails_admin/issues#issue/217)
-* rails_admin knows nothing about the virtual attributes *_list(tag_list, skill_list etc.), which created by `acts_as_taggable_on` for display and edit tags.
-
-The first problem can be **temporary** solved by using [my rails_admin fork](https://github.com/kryzhovnik/rails_admin).
-The second problem is solved by this gem.
+The problem is solved by this gem.
 
 Installation
 ============
 
 In your `Gemfile`:
-    gem 'rails_admin', :git => 'https://github.com/kryzhovnik/rails_admin.git', :branch => 'namespaced-models'
+    gem 'rails_admin', :git => 'https://github.com/sferik/rails_admin.git'
     gem 'rails_admin_tag_list_field', :git => 'https://github.com/kryzhovnik/rails_admin_tag_list_field.git'
 
 And run:
     $ bundle install
-    
-If you want to use your own rails_admin fork first do the following:
 
-1. Solve namespaced models issue in your rails_admin fork (for [example](https://github.com/kryzhovnik/rails_admin/commit/744164ca549a592d1876be3bdd12e34e80438059)
-2. Fork this gem and correct dependences in the `rails_admin_tag_list_field/Gemfile`
-    gem 'rails_admin', :git => '...'
-    
 Usage and Configuration
 =======================
 
 Gem [rails_admin_tag_list_field](https://github.com/kryzhovnik/rails_admin_tag_list_field) by default does the following:
 
 1. Register new field type `TagList` for rails_admin
-2. Finds acts_as_taggable_on virtual attributes (like `*_list`) and adds them to `RailsAdmin.config`
+2. Finds acts_as_taggable_on virtual attributes (like `*_list`) and adds its  to `RailsAdmin.config`
 3. Hides associations created by acts_as_taggable_on
 
 For example, this is your model:
