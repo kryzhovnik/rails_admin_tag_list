@@ -1,7 +1,7 @@
 # Configure Rails Envinronment
 ENV["RAILS_ENV"] = "test"
 
-require File.expand_path('../dummy_app/config/environment', __FILE__)
+require File.expand_path('../dummy/config/environment', __FILE__)
 require "rails/test_help"
 require "rspec/rails"
 require "database_helpers"
@@ -22,8 +22,7 @@ RSpec.configure do |config|
   config.include PlayerHelpers  
   config.include Warden::Test::Helpers
   config.include RSpec::Matchers
-
-
+  config.include RailsAdmin::Engine.routes.url_helpers
   config.include Webrat::Matchers
   config.include Webrat::HaveTagMatcher
   config.include DatabaseHelpers  
@@ -40,6 +39,7 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
+    RailsAdmin.test_reset!
     Warden.test_reset!
   end
 end

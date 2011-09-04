@@ -4,11 +4,11 @@ describe "RailsAdmin Edit Page" do
   before { create_player_and_get_edit_page }
     
   it "should contain tag list field" do
-    response.should have_selector(".field #players_tag_list")
+    response.should have_selector(".field #player_tag_list")
   end
     
   it "should contain skill list field" do
-    response.should have_selector(".field #players_skill_list")
+    response.should have_selector(".field #player_skill_list")
   end
     
   it "should not display acts-as-taggable-on default associations" do

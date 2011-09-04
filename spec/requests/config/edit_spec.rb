@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "RailsAdmin Config DSL Edit Section" do
   it "should show tag list fields by default" do
     get_new_player_page
-    response.should have_tag("input#players_tag_list")
-    response.should have_tag("input#players_skill_list")
+    response.should have_tag("input#player_tag_list")
+    response.should have_tag("input#player_skill_list")
   end
   
   describe "tag list field" do
@@ -23,8 +23,6 @@ describe "RailsAdmin Config DSL Edit Section" do
         elements[0].should have_tag("label", :content => "Renamed field")
         elements[1].should have_tag("label", :content => "Name")
       end
-      # Reset
-      RailsAdmin::Config.reset Player
     end
 
     it "should be renameable by type" do
@@ -41,9 +39,6 @@ describe "RailsAdmin Config DSL Edit Section" do
         elements.should have_tag("label", :content => "Tag list (associated words)")
         elements.should have_tag("label", :content => "Skill list (associated words)")
       end
-
-      # Reset
-      RailsAdmin::Config.reset Player
     end
 
     it "should be hideable" do
@@ -58,12 +53,10 @@ describe "RailsAdmin Config DSL Edit Section" do
       end
       get_new_player_page
       response.should have_tag(".field") do |elements|
-        elements[0].should have_tag("#players_skill_list")
-        elements[1].should have_tag("#players_name")
+        elements[0].should have_tag("#player_skill_list")
+        elements[1].should have_tag("#player_name")
       end
       response.should_not contain("Tag list")
-      # Reset
-      RailsAdmin::Config.reset Player
     end
 
     it "should be hideable by type" do
@@ -80,9 +73,6 @@ describe "RailsAdmin Config DSL Edit Section" do
         elements.should_not have_tag("label", :content => "Tag list")
         elements.should_not have_tag("label", :content => "Skill list")
       end
-
-      # Reset
-      RailsAdmin::Config.reset Player
     end
 
     it "should have option to customize the help text" do
@@ -99,9 +89,6 @@ describe "RailsAdmin Config DSL Edit Section" do
         elements[0].should have_tag("p.help", :content => "Use commas to separate tags. Additional help text for tag list field")
         elements[1].should have_tag("p.help", :content => "Use commas to separate tags")
       end
-
-      # Reset
-      RailsAdmin::Config.reset Player
     end
   end
 end

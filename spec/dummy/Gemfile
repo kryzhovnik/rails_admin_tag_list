@@ -1,0 +1,27 @@
+source 'http://rubygems.org'
+
+gem 'rails', '~> 3.1.0'
+gem 'sqlite3'
+gem 'json'
+gem 'jquery-rails'
+
+gem 'devise', '~> 1.4'
+gem 'acts-as-taggable-on'
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'rails_admin_tag_list_field', :path => '../../'
+
+platforms :jruby, :mingw_18, :ruby_18 do
+  gem 'fastercsv', '~> 1.5.4'
+end
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.1.0'
+  gem 'coffee-rails', '~> 3.1.0'
+  gem 'uglifier'
+end
+
+group :development do
+  gem 'therubyracer'
+end

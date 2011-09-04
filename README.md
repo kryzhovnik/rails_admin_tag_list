@@ -1,7 +1,7 @@
 Introduction
 ============
 
-For today(21 jan 2011) great [rails_admin](https://github.com/sferik/rails_admin) gem does not work with another great gem - [acts_as_taggable_on](https://github.com/mbleigh/acts-as-taggable-on), because rails_admin knows nothing about the virtual attributes *_list(tag_list, skill_list etc.), which created by `acts_as_taggable_on` for display and edit tags.
+For today(03 sep 2011) great [rails_admin](https://github.com/sferik/rails_admin) gem does not work with another great gem - [acts_as_taggable_on](https://github.com/mbleigh/acts-as-taggable-on), because rails_admin knows nothing about the virtual attributes *_list(tag_list, skill_list etc.), which created by `acts_as_taggable_on` for display and edit tags.
 
 The problem is solved by this gem.
 
@@ -21,7 +21,7 @@ Usage and Configuration
 Gem [rails_admin_tag_list_field](https://github.com/kryzhovnik/rails_admin_tag_list_field) by default does the following:
 
 1. Register new field type `TagList` for rails_admin
-2. Finds acts_as_taggable_on virtual attributes (like `*_list`) and adds its  to `RailsAdmin.config`
+2. Finds acts_as_taggable_on virtual attributes (like `*_list`) and adds them to `RailsAdmin.config`
 3. Hides associations created by acts_as_taggable_on
 
 For example, this is your model:
@@ -39,33 +39,41 @@ You can do whatever what allows to do by the rails_admin:
 
 **rename lable**
 
-    RailsAdmin.config Player do
-      edit do
-        field :tag_list do
-          label "Tags"
+    RailsAdmin.config do |config|
+      config.model Player do
+        edit do
+          field :tag_list do
+            label "Tags"
+          end
+          field :skill_list
         end
-        field :skill_list
       end
     end
 
 **hide all tag_list fields**
 
-    RailsAdmin.config Player do
-      edit do
-        fields_of_type :tag_list do
-          hide
+    RailsAdmin.config do |config|
+      config.model Player do
+        edit do
+          fields_of_type :tag_list do
+            hide
+          end
         end
       end
     end
 
 **reassing partial**
 
-    RailsAdmin.config Player do
-      edit do
-        fields_of_type :tag_list do
-          partial 'awesome_tag_list'
+    RailsAdmin.config do |config|
+      config.model Player do
+        edit do
+          fields_of_type :tag_list do
+            partial_edit 'awesome_tag_list'
+          end
         end
       end
     end
+
+Create you custom partial and put it to `app/views/rails_admin/main/` in your own project folder 
 
 

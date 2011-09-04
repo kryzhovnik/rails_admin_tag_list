@@ -3,10 +3,6 @@ require 'spec_helper'
 
 describe 'RailsAdmin I18n' do
   before(:all) { I18n.locale = :ru  }
-  it 'should be internationalizable' do
-    get rails_admin_dashboard_path
-    response.should contain('Панель управления')
-  end
   
   describe "Edit Page" do
     

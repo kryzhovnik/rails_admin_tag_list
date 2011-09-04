@@ -1,6 +1,0 @@
-                <%= label_tag "#{field.abstract_model.to_param.singularize}_#{field.name}", field.label %>
-                <%= text_field field.abstract_model.to_param.singularize,
-                               field.name,
-                               :size => 50,
-                               :class => "#{field.css_class} #{field.has_errors? ? "errorField" : nil}",
-                               :value => field.formatted_value %>
