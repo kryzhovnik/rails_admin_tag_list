@@ -9,10 +9,12 @@ Installation
 ============
 
 In your `Gemfile`:
+
     gem 'rails_admin', :git => 'https://github.com/sferik/rails_admin.git'
     gem 'rails_admin_tag_list_field', :git => 'https://github.com/kryzhovnik/rails_admin_tag_list_field.git'
 
 And run:
+
     $ bundle install
 
 Usage and Configuration
