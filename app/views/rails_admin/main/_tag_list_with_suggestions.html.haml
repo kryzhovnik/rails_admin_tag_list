@@ -1,0 +1,33 @@
+= form.send field.view_helper, field.method_name, field.html_attributes
+
+- tag_suggestions(field, :length => 5, :order => { :count => :desc }).each do |tag|
+  = link_to tag, '#', :class => 'tag_suggestion', :data => { :input_id => form.dom_id(field) }
+
+:javascript
+  jQuery(function(){
+    var input_id = '#{form.dom_id(field)}'
+    $('.tag_suggestion[data-input-id=' + input_id + ']').click(function(event){
+      var tag_list, new_value;
+      tag_list = $(this).siblings('input#' + input_id);
+
+      if (!tag_list.val().match(/\S/)) {
+        new_value = this.innerHTML;
+      } else {
+        new_value = [tag_list.val(), this.innerHTML].join(', ');
+      };
+      tag_list.val(new_value);
+
+      event.preventDefault();
+      return false;
+    });
+  });
+
+%style
+  :sass
+    .tag_suggestion
+      color: #777
+      border-bottom: 1px dotted #b94a48
+      &:hover
+        color: #aaa
+        border-bottom: 1px dotted #953b39
+        text-decoration: none

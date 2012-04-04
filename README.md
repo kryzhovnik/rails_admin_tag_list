@@ -43,7 +43,19 @@ There is your model:
 
 > > `attr_accessible :tag_list, :skill_list`
 
-You can do whatever what allows to do by the rails_admin:
+This gem comes with two tag field partial's named `form_tag_list` (default) and `tag_list_with_suggestions`. You can try the second one:
+
+    RailsAdmin.config do |config|
+      config.models do
+        edit do
+          fields_of_type :tag_list do
+            partial 'tag_list_with_suggestions'
+          end
+        end
+      end
+    end
+
+You can do with tag_list fields whatever what allows to do rails_admin:
 
 **rename lable**
 
