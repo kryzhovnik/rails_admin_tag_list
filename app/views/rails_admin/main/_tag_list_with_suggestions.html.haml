@@ -10,17 +10,17 @@
       var tag_list, current_values, new_values, tag;
       tag_list = $(this).siblings('input#' + input_id);
       // Get the current values by splitting on a comma and stripping whitespace.
-      current_values = jQuery.map(tag_list.val().split(','), function(val){ return jQuery.trim(val) });
+      values = jQuery.map(tag_list.val().split(','), function(val){ return jQuery.trim(val) });
+      // Remove empty strings from values
+      values = jQuery.grep(values, function(n) { return n.length > 0 });
       tag = $(this).text();
-      // Remove the current tag, if present.
-      new_values = jQuery.grep(current_values, function(n) {
-        return jQuery.trim(n) != tag
-      });
-      // Add the current tag, unless we've altered the values already.
-      if (new_values.length == current_values.length) {
-        new_values[new_values.length] = tag
+      if (jQuery.inArray(tag, values) == -1) {
+        values.push(tag);
+      } else {
+        // Remove current tag from current_values
+        values = jQuery.grep(values, function(n) { return n != tag });
       }
-      tag_list.val(new_values.join(', '));
+      tag_list.val(values.join(', '));
 
       return false;
     });
