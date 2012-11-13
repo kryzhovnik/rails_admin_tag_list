@@ -7,17 +7,21 @@
   jQuery(function(){
     var input_id = '#{form.dom_id(field)}'
     $('.tag_suggestion[data-input-id=' + input_id + ']').click(function(event){
-      var tag_list, new_value;
+      var tag_list, values, tag;
       tag_list = $(this).siblings('input#' + input_id);
-
-      if (!tag_list.val().match(/\S/)) {
-        new_value = this.innerHTML;
+      // Get the current values by splitting on a comma and stripping whitespace.
+      values = jQuery.map(tag_list.val().split(','), function(val){ return jQuery.trim(val) });
+      // Remove empty strings from values
+      values = jQuery.grep(values, function(n) { return n.length > 0 });
+      tag = $(this).text();
+      if (jQuery.inArray(tag, values) == -1) {
+        values.push(tag);
       } else {
-        new_value = [tag_list.val(), this.innerHTML].join(', ');
-      };
-      tag_list.val(new_value);
+        // Remove current tag from current_values
+        values = jQuery.grep(values, function(n) { return n != tag });
+      }
+      tag_list.val(values.join(', '));
 
-      event.preventDefault();
       return false;
     });
   });
