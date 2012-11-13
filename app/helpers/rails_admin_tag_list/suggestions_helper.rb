@@ -1,6 +1,10 @@
 module RailsAdminTagList
   module SuggestionsHelper
     def tag_suggestions(field, options = {})
+      record = field.bindings[:object]
+      enum_method = '%s_enum' % field.name
+      return record.send(enum_method) if record.respond_to? enum_method
+
       defaults = {
         :order => { :count => :desc },
         :length => 5
