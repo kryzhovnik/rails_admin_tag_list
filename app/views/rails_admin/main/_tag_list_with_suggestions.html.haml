@@ -1,7 +1,9 @@
 = form.send field.view_helper, field.method_name, field.html_attributes
+- suggestions = tag_suggestions(field, :length => 5, :order => { :count => :desc })
 
-- tag_suggestions(field, :length => 5, :order => { :count => :desc }).each do |tag|
-  = link_to tag, '#', :class => 'tag_suggestion', :data => { :input_id => form.dom_id(field) }
+- if suggestions.any?
+  - suggestions.each do |tag|
+    = link_to %{<i class="icon-tag"></i> #{tag}}.html_safe, '#', :class => 'tag_suggestion', :style => 'margin:0 5px', :data => { :input_id => form.dom_id(field) }
 
 :javascript
   jQuery(function(){
