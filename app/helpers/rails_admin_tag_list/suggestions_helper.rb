@@ -13,6 +13,18 @@ module RailsAdminTagList
       tags = sort_tags(tags, options[:order])
       tags[0..options[:length]].map(&:name)
     end
+    
+    def ratl_all_tags(field, options={})
+      defaults = {
+        :order => { :name => :asc }
+      }
+      options = defaults.deep_merge(options)
+      model = field.abstract_model.model_name.constantize
+      tags_name = field.name.to_s.gsub(/_list/, '').to_sym
+      tags = model.tags_on(tags_name)
+      tags = sort_tags(tags, options[:order])
+      tags.map(&:name)
+    end
 
     private
       def sort_tags(tags, options)
