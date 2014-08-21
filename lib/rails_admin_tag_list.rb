@@ -39,9 +39,10 @@ RailsAdmin::Config::Fields.register_factory do |parent, properties, fields|
 
   if defined?(::ActsAsTaggableOn) && model.taggable?
     tag_types = model.tag_types
-    if tag_types.include?(properties[:name])
-      name = "#{properties[:name].to_s.singularize}_list".to_sym
+    property_name = properties.respond_to?(:name) ? properties.name : properties[:name]
 
+    if tag_types.include?(property_name)
+      name = "#{property_name.to_s.singularize}_list".to_sym
       fields << RailsAdmin::Config::Fields::Types::TagList.new(parent, name, properties)
     end
   end
