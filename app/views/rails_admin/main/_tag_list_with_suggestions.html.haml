@@ -1,4 +1,4 @@
-= form.send field.view_helper, field.method_name, field.html_attributes
+= form.send field.view_helper, field.method_name, field.html_attributes.reverse_merge({ value: field.form_value, class: 'form-control', required: field.required})
 
 - tag_suggestions(field, :length => 5, :order => { :count => :desc }).each do |tag|
   = link_to tag, '#', :class => 'tag_suggestion', :data => { :input_id => form.dom_id(field) }
@@ -26,12 +26,16 @@
     });
   });
 
-%style
-  :sass
-    .tag_suggestion
-      color: #777
-      border-bottom: 1px dotted #b94a48
-      &:hover
-        color: #aaa
-        border-bottom: 1px dotted #953b39
-        text-decoration: none
+:sass
+  .tag_list_type
+    input
+      display: inline-block
+      margin-right: 10px
+  .tag_suggestion
+    margin-right: 5px
+    border-bottom: 1px dotted #b94a48
+    color: #777
+    &:hover
+      color: #aaa
+      border-bottom: 1px dotted #953b39
+      text-decoration: none
