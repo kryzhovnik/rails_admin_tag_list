@@ -46,7 +46,7 @@ There is your model:
 This gem comes with two tag field partial's named `form_tag_list` (default) and `tag_list_with_suggestions`. You can try the second one:
 
     RailsAdmin.config do |config|
-      config.models do
+      config.model Player do
         edit do
           fields_of_type :tag_list do
             partial 'tag_list_with_suggestions'
