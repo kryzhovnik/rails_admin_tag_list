@@ -2,7 +2,7 @@
 
 :javascript
   $(function() {
-      var availableTags = #{ratl_all_tags(field)};
+      var availableTags = #{ratl_suggestions(field, order: :name)};
 
       function split( val ) {
         return val.split( /,\s*/ );

@@ -1,42 +1,34 @@
 module RailsAdminTagList
   module SuggestionsHelper
-    def tag_suggestions(field, options = {})
-      defaults = {
-        :order => { :count => :desc },
-        :length => 5
-      }
-      options = defaults.deep_merge(options)
 
-      model = field.abstract_model.model_name.constantize
-      tags_name = field.name.to_s.gsub(/_list/, '').pluralize.to_sym
-      tags = model.tag_counts_on(tags_name)
-      tags = sort_tags(tags, options[:order])
-      tags[0..options[:length]].map(&:name)
-    end
-    
-    def ratl_all_tags(field, options={})
-      defaults = {
-        :order => { :name => :asc }
-      }
-      options = defaults.deep_merge(options)
-      model = field.abstract_model.model_name.constantize
-      tags_name = field.name.to_s.gsub(/_list/, '').to_sym
-      tags = model.tags_on(tags_name)
-      tags = sort_tags(tags, options[:order])
-      tags.map(&:name)
+    def ratl_suggestions(field, options={})
+      options = options.merge(max_count: field.ratl_max_suggestions)
+
+      tags = ratl_tags(field)
+      sorted_tags = ratl_sort_tags(tags, options[:order])
+      sorted_tags[0..options[:max_count]].map(&:name)
     end
 
     private
-      def sort_tags(tags, options)
-        if options.is_a?(Hash)
-          if options[:count]
-            tags = tags.sort_by(&:count)
-            tags = tags.reverse if options[:count] == :desc
-          end
-        elsif [:rand, :random, :shuffle].include?(options)
-          tags = tags.shuffle
+
+      def ratl_tags(field)
+        model = field.abstract_model.model_name.constantize
+        tags_name = field.name.to_s.gsub(/_list/, '').pluralize.to_sym
+        
+        model.tag_counts_on(tags_name)
+      end
+
+      def ratl_sort_tags(tags, order)
+        case order.to_sym
+        when :count
+          tags.sort_by { |tag| -tag.count }
+        when :name
+          tags.sort_by { |tag| tag.name }
+        when :rand, :random, :shuffle
+          tags.shuffle
+        else
+          raise ArgumentError.new("RailsAdminTagList field unrecognized sorting order")
         end
-        tags
       end
   end
 end

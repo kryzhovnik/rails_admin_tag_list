@@ -43,13 +43,18 @@ There is your model:
 
 > `attr_accessible :tag_list, :skill_list`
 
-This gem comes with two tag field partial's named `form_tag_list` (default) and `tag_list_with_suggestions`. You can try the second one:
+**edit field view**
+
+In addition to default field view (named `form_tag_list`) this gem provides two custom views `tag_list_with_suggestions` and `tag_list_with_autocomplete`. To enable any of them specify partial name:
 
     RailsAdmin.config do |config|
       config.model Player do
         edit do
           fields_of_type :tag_list do
             partial 'tag_list_with_suggestions'
+            
+            # the option sets max count of suggestions (default is 100); set -1 to abolish the limit
+            ratl_max_suggestions -1
           end
         end
       end

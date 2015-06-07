@@ -19,15 +19,17 @@ module RailsAdmin
           register_instance_option(:pretty_value) do
             value.join(', ')
           end
+
           # Accessor for field's label.
           #
           # @see RailsAdmin::AbstractModel.properties
           register_instance_option(:help) do
-            I18n.t(:tag_list_help, :scope => [:admin, :new], :default => 'Use commas to separate tags')
+            I18n.t(:tag_list_help, scope: [:admin, :new], default: 'Use commas to separate tags')
           end
-          register_instance_option(:partial) do
-            :form_tag_list
-          end
+
+          register_instance_option(:partial) { :form_tag_list }
+
+          register_instance_option(:ratl_max_suggestions) { 100 }
         end
       end
     end
