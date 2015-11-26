@@ -12,6 +12,10 @@ module RailsAdmin
       module Types
         class TagList < RailsAdmin::Config::Fields::Base
           RailsAdmin::Config::Fields::Types::register(self)
+          register_instance_option(:form_value) do
+            value.join(', ')
+          end
+          
           register_instance_option(:formatted_value) do
             value.join(', ')
           end
