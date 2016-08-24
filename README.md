@@ -10,8 +10,10 @@ Installation
 
 In your `Gemfile`:
 
-    gem 'rails_admin'
-    gem 'rails_admin_tag_list'
+```ruby
+gem 'rails_admin'
+gem 'rails_admin_tag_list'
+```
 
 and run:
 
@@ -27,15 +29,15 @@ rails_admin_tag_list by default does the following:
 
 There is your model:
 
-    class Player < ActiveRecord::Base
-      attr_accessible :name
-      attr_accessible :tag_list, :skill_list
+```ruby
+class Player < ActiveRecord::Base
+  attr_accessible :name
+  attr_accessible :tag_list, :skill_list
 
-      acts_as_taggable
-      acts_as_taggable_on :skills
-    end
-
-
+  acts_as_taggable
+  acts_as_taggable_on :skills
+end
+```
 
 > *Note that tag_list (skill_list, etc.) attribute should be available for mass-assignment by rails_admin users.*
 
@@ -47,56 +49,64 @@ There is your model:
 
 In addition to default field view (named `form_tag_list`) this gem provides two custom views `tag_list_with_suggestions` and `tag_list_with_autocomplete`. To enable any of them specify partial name:
 
-    RailsAdmin.config do |config|
-      config.model Player do
-        edit do
-          fields_of_type :tag_list do
-            partial 'tag_list_with_suggestions'
-            
-            # the option sets max count of suggestions (default is 100); set -1 to abolish the limit
-            ratl_max_suggestions -1
-          end
-        end
+```ruby
+RailsAdmin.config do |config|
+  config.model Player do
+    edit do
+      fields_of_type :tag_list do
+        partial 'tag_list_with_suggestions'
+        
+        # the option sets max count of suggestions (default is 100); set -1 to abolish the limit
+        ratl_max_suggestions -1
       end
     end
+  end
+end
+```
 
 You can do with tag_list fields whatever what allows to do rails_admin:
 
 **rename label**
 
-    RailsAdmin.config do |config|
-      config.model Player do
-        edit do
-          field :tag_list do
-            label "Tags"
-          end
-          field :skill_list
-        end
+```ruby
+RailsAdmin.config do |config|
+  config.model Player do
+    edit do
+      field :tag_list do
+        label "Tags"
       end
+      field :skill_list
     end
+  end
+end
+```
 
 **hide all tag_list fields**
 
-    RailsAdmin.config do |config|
-      config.model Player do
-        edit do
-          fields_of_type :tag_list do
-            hide
-          end
-        end
+```ruby
+RailsAdmin.config do |config|
+  config.model Player do
+    edit do
+      fields_of_type :tag_list do
+        hide
       end
     end
+  end
+end
+```
 
 **reassing partial**
 
-    RailsAdmin.config do |config|
-      config.model Player do
-        edit do
-          fields_of_type :tag_list do
-            partial 'awesome_tag_list'
-          end
-        end
+```ruby
+RailsAdmin.config do |config|
+  config.model Player do
+    edit do
+      fields_of_type :tag_list do
+        partial 'awesome_tag_list'
       end
     end
+  end
+end
+```
 
 Create you custom partial and put it to `app/views/rails_admin/main/` in your own project folder 
