@@ -62,7 +62,7 @@ In addition to default field view (named `form_tag_list`) this gem provides two 
 
 You can do with tag_list fields whatever what allows to do rails_admin:
 
-**rename lable**
+**rename label**
 
     RailsAdmin.config do |config|
       config.model Player do
