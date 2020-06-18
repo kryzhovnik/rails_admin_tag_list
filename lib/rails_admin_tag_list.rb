@@ -13,11 +13,11 @@ module RailsAdmin
         class TagList < RailsAdmin::Config::Fields::Base
           RailsAdmin::Config::Fields::Types::register(self)
           register_instance_option(:formatted_value) do
-            value.join(', ')
+            value && value.join(', ')
           end
 
           register_instance_option(:pretty_value) do
-            value.join(', ')
+            value && value.join(', ')
           end
 
           # Accessor for field's label.
