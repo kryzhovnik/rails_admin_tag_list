@@ -1,3 +1,8 @@
+DEPRECATED
+==========
+
+This plugin is no longer supported.
+
 Introduction
 ============
 
@@ -19,6 +24,8 @@ and run:
 
     $ bundle install
 
+Check [acts_as_taggable_on](https://github.com/mbleigh/acts-as-taggable-on) docs in order to install it properly.
+
 Usage and Configuration
 =======================
 
@@ -31,9 +38,6 @@ There is your model:
 
 ```ruby
 class Player < ActiveRecord::Base
-  attr_accessible :name
-  attr_accessible :tag_list, :skill_list
-
   acts_as_taggable
   acts_as_taggable_on :skills
 end
@@ -55,7 +59,7 @@ RailsAdmin.config do |config|
     edit do
       fields_of_type :tag_list do
         partial 'tag_list_with_suggestions'
-        
+
         # the option sets max count of suggestions (default is 100); set -1 to abolish the limit
         ratl_max_suggestions -1
       end
@@ -109,4 +113,4 @@ RailsAdmin.config do |config|
 end
 ```
 
-Create you custom partial and put it to `app/views/rails_admin/main/` in your own project folder 
+Create you custom partial and put it to `app/views/rails_admin/main/` in your own project folder. Check an [example](https://github.com/kryzhovnik/rails_admin_tag_list/blob/master/app/views/rails_admin/main/_tag_list_with_suggestions.html.haml)
