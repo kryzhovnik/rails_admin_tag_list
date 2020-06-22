@@ -1,4 +1,4 @@
-DEPRECATED
+!!! DEPRECATED
 ==========
 
 This plugin is no longer supported.
